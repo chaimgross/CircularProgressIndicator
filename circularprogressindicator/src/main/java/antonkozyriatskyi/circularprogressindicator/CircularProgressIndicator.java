@@ -307,7 +307,7 @@ public class CircularProgressIndicator extends View {
     private void calculateBounds(int w, int h) {
         radius = w / 2f;
 
-        float dotWidth = dotPaint.getStrokeWidth();
+        float dotWidth = dp2px(dotPaint.getStrokeWidth() * 1.1f);
         float progressWidth = progressPaint.getStrokeWidth();
         float progressBackgroundWidth = progressBackgroundPaint.getStrokeWidth();
         float strokeSizeOffset = (shouldDrawDot) ? Math.max(dotWidth, Math.max(progressWidth, progressBackgroundWidth)) : Math.max(progressWidth, progressBackgroundWidth); // to prevent progress or dot from drawing over the bounds
