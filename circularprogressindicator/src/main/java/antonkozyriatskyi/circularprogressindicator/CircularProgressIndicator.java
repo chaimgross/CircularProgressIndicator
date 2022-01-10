@@ -59,10 +59,10 @@ public class CircularProgressIndicator extends View {
 
     private static final int DESIRED_WIDTH_DP = 150;
 
-    private static final String DEFAULT_PROGRESS_COLOR = "#3F51B5";
+    private static final String DEFAULT_PROGRESS_COLOR = "#41319E";
     private static final int DEFAULT_TEXT_SIZE_SP = 24;
     private static final int DEFAULT_STROKE_WIDTH_DP = 8;
-    private static final String DEFAULT_PROGRESS_BACKGROUND_COLOR = "#e0e0e0";
+    private static final String DEFAULT_PROGRESS_BACKGROUND_COLOR = "#051A104A";
 
     private static final int DEFAULT_ANIMATION_DURATION = 1_000;
 
@@ -220,7 +220,7 @@ public class CircularProgressIndicator extends View {
         dotPaint.setStyle(Paint.Style.STROKE);
         dotPaint.setColor(dotColor);
         dotPaint.setAntiAlias(true);
-        dotPaint.setStrokeWidth(dp2px(10));
+        dotPaint.setStrokeWidth(dotWidth);
 
         textPaint = new TextPaint();
         textPaint.setStrokeCap(Paint.Cap.ROUND);
@@ -356,15 +356,14 @@ public class CircularProgressIndicator extends View {
         float x = circleBounds.centerX() - radius * cos;
         float y = circleBounds.centerY() - radius * sin;
 
-        canvas.drawCircle(x, y, dp2px(10), dotPaint);
         Paint inner = new Paint();
         inner.setStrokeCap(Paint.Cap.ROUND);
         inner.setStyle(Paint.Style.FILL_AND_STROKE);
         inner.setColor(Color.WHITE);
         inner.setAntiAlias(true);
-        inner.setStrokeWidth(getDotWidth());
-        canvas.drawCircle(x, y, dp2px(10), dotPaint);
-        canvas.drawCircle(x, y, dp2px(2), inner);
+        inner.setStrokeWidth(getDotWidth() / 1.25f);
+        canvas.drawCircle(x, y, getDotWidth(), dotPaint);
+        canvas.drawCircle(x, y, getDotWidth() / 4, inner);
     }
 
     private void drawText(Canvas canvas) {
