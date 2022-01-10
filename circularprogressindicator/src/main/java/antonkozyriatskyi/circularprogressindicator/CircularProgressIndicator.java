@@ -217,10 +217,10 @@ public class CircularProgressIndicator extends View {
 
         dotPaint = new Paint();
         dotPaint.setStrokeCap(Paint.Cap.ROUND);
-        dotPaint.setStrokeWidth(dotWidth);
-        dotPaint.setStyle(Paint.Style.FILL_AND_STROKE);
+        dotPaint.setStyle(Paint.Style.STROKE);
         dotPaint.setColor(dotColor);
         dotPaint.setAntiAlias(true);
+        dotPaint.setStrokeWidth(dp2px(10));
 
         textPaint = new TextPaint();
         textPaint.setStrokeCap(Paint.Cap.ROUND);
@@ -337,7 +337,7 @@ public class CircularProgressIndicator extends View {
         drawProgressBackground(canvas);
         drawProgress(canvas);
         if (shouldDrawDot) drawDot(canvas);
-        drawText(canvas);
+      //  drawText(canvas);
     }
 
     private void drawProgressBackground(Canvas canvas) {
@@ -356,7 +356,15 @@ public class CircularProgressIndicator extends View {
         float x = circleBounds.centerX() - radius * cos;
         float y = circleBounds.centerY() - radius * sin;
 
-        canvas.drawPoint(x, y, dotPaint);
+        canvas.drawCircle(x, y, dp2px(10), dotPaint);
+        Paint inner = new Paint();
+        inner.setStrokeCap(Paint.Cap.ROUND);
+        inner.setStyle(Paint.Style.FILL_AND_STROKE);
+        inner.setColor(Color.WHITE);
+        inner.setAntiAlias(true);
+        inner.setStrokeWidth(getDotWidth());
+        canvas.drawCircle(x, y, dp2px(10), dotPaint);
+        canvas.drawCircle(x, y, dp2px(2), inner);
     }
 
     private void drawText(Canvas canvas) {
